@@ -1,0 +1,17 @@
+.body {
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    width: 400px;
+}
+
+#pat {
+    height: 398.4px;
+}
+
+.h1 {
+    text-align: center;
+    padding-bottom: 70px;
+}
