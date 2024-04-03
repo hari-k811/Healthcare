@@ -20,5 +20,8 @@ from health import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.home)
+    path('',views.home),
+    path('doctor/',views.doctor_login, name='doctor_login'),
+    path('doctor/login/', views.doctor_login_page, name='doctor_login_page'),
+    path('doctor/register/', views.doctor_register, name='doctor_register'),
 ]

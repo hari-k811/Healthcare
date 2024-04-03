@@ -5,6 +5,7 @@
 
 .card {
     width: 400px;
+    box-shadow: 0 10px 20px 0 #ffffff4d;
 }
 
 #pat {
