@@ -1,0 +1,66 @@
+.body {
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    width: 400px;
+    box-shadow: 0 10px 20px 0 #ffffff4d;
+}
+
+#pat {
+    height: 398.4px;
+}
+
+.h1 {
+    text-align: center;
+    padding-bottom: 70px;
+}
+
+.appointment-link {
+    text-decoration: none;
+    color: #fff;
+}
+
+.appointment-heading {
+    text-align: center;
+    font-size: 36px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    background-color: blue;
+}
+
+.healthcare-tips {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    background-color: rgba(202, 27, 27, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    animation: rotateTips 10s infinite; 
+}
+
+.healthcare-tips-list{
+    background-color: red;
+}
+
+@keyframes rotateTips {
+    0% {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    10% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    90% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+}
