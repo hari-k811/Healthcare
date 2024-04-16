@@ -6,13 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        /* General styles */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
         }
 
-        /* Style for the side panel */
         .sidenav {
             height: 100%;
             width: 250px;
@@ -25,7 +23,6 @@
             padding-top: 20px;
         }
 
-        /* Style for the links inside the side panel */
         .sidenav a {
             padding: 10px 15px;
             text-decoration: none;
@@ -34,19 +31,16 @@
             display: block;
         }
 
-        /* Style for the active/current link */
         .sidenav a.active {
             background-color: #4CAF50;
             color: white;
         }
 
-        /* Style for the hover effect on links */
         .sidenav a:hover {
             background-color: #ddd;
             color: black;
         }
 
-        /* Style for the user profile picture */
         .profile-pic {
             width: 100px;
             height: 100px;
@@ -57,7 +51,6 @@
             margin-right: auto;
         }
 
-        /* Style for the greeting */
         .greeting {
             text-align: center;
             margin-bottom: 20px;
@@ -70,11 +63,8 @@
 </head>
 <body>
     <div class="sidenav">
-        <!-- User profile picture -->
         <img src="{% static 'health/images/patient.jpg' %}" alt="Profile Picture" class="profile-pic">
-        <!-- Greeting with username -->
         <div class="greeting">Hi, {{ request.user.first_name }}</div>
-        <!-- Links for the dashboard options -->
         <a href="patient-dashboard">Dashboard</a>
         <a href="#">Appointments</a>
         <a href="#">Prescriptions</a>
@@ -82,9 +72,7 @@
         <a href="#">Lab Results</a>
         <a href="patient_details" class="active">Messages</a>
         <a href="#">Settings</a>
-        <!-- You can add more links as needed -->
-    
-        <!-- Logout button -->
+       
         <form method="post" action="{% url 'logout' %}">
             {% csrf_token %}
             <button type="submit" style="background-color: #f44336; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: block; font-size: 18px; margin-left: auto; margin-right: auto; margin-top: 20px; cursor: pointer;">Logout</button>

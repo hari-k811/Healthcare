@@ -1,3 +1,4 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="{% static 'health/css/adminstyle.css' %}">
     <script>
         $( function() {
             $( "#id_date" ).datepicker({ dateFormat: 'yy-mm-dd' });
@@ -14,11 +16,30 @@
     </script>
 </head>
 <body>
-    <h1>Book Appointment</h1>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
-    </form>
+    <div class="sidenav">
+        <img src="{% static 'health/images/patient.jpg' %}" alt="Profile Picture" class="profile-pic">
+        <div class="greeting">Hi, {{ request.user.first_name }}</div>
+        <a href="patient-dashboard" >Dashboard</a>
+        <a href="patientprofile" >Profile</a>
+        <a href="book-appointment" class="active">Appointments</a>
+        <a href="#">Prescriptions</a>
+        <a href="#">Medical Records</a>
+        <a href="#">Lab Results</a>
+        <a href="patient_details">Messages</a>
+        <a href="#">Settings</a>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" >Logout</button>
+        </form>
+
+        <center>
+            <h1>Book Appointment</h1>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Submit</button>
+            </form>
+        </center>
+   
 </body>
 </html>

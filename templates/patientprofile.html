@@ -4,38 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{% static 'health/css/adminstyle.css' %}">
 </head>
 <body>
     <div class="sidenav">
-        <!-- User profile picture -->
         <img src="{% static 'health/images/patient.jpg' %}" alt="Profile Picture" class="profile-pic">
-        <!-- Greeting with username -->
         <div class="greeting">Hi, {{ request.user.first_name }}</div>
-        <!-- Links for the dashboard options -->
-        <a href="patient-dashboard" class="active">Dashboard</a>
-        <a href="patientprofile">Profile</a>
-        <a href="#">Appointments</a>
+        <a href="patient-dashboard" >Dashboard</a>
+        <a href="patientprofile" class="active">Profile</a>
+        <a href="book-appointment">Appointments</a>
         <a href="#">Prescriptions</a>
         <a href="#">Medical Records</a>
         <a href="#">Lab Results</a>
         <a href="patient_details">Messages</a>
         <a href="#">Settings</a>
-        <!-- You can add more links as needed -->
-    
-        <!-- Logout button -->
+   
         <form method="post" action="{% url 'logout' %}">
             {% csrf_token %}
             <button type="submit" style="background-color: #f44336; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: block; font-size: 18px; margin-left: auto; margin-right: auto; margin-top: 20px; cursor: pointer;">Logout</button>
         </form>
     </div>
+    <center>
+        <div class="main-content">
+            <h1>Edit Health Data</h1>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+            <button type="submit">Save</button>
+            </form>
+        </div>
+    </center>
 
-    <div class="main-content">
-        <h1>Edit Health Data</h1>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-        <button type="submit">Save</button>
-        </form>
-    </div>
+    
 </body>
 </html>

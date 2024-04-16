@@ -175,7 +175,8 @@ def reject_appointment(request, appointment_id):
     return redirect('doctor-dashboard')
 
 @login_required
-def accept_reject_appointment(request, appointment_id):
+def accept_reject_appointment(request):
+    appointment_id = request.GET.get('id')
     appointment = get_object_or_404(Appointment, id=appointment_id)
     if request.method == 'POST':
         action = request.POST.get('action')
@@ -186,6 +187,10 @@ def accept_reject_appointment(request, appointment_id):
         appointment.save()
         return redirect('admin-dashboard' if request.user.is_superuser else 'doctor-dashboard')
     return render(request, 'accept_reject_appointment.html', {'appointment': appointment})
+
+@login_required
+def appointment_view(request):
+    return render(request,'appointments.html')
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
