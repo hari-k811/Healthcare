@@ -44,7 +44,7 @@ def admin_signup_view(request):
             my_admin_group = Group.objects.get_or_create(name='ADMIN')
             my_admin_group[0].user_set.add(user)
             return HttpResponseRedirect('adminlogin')
-    return render(request,'adminlogin.html',{'form':form})
+    return render(request,'adminsignup.html',{'form':form})
 
 def doctor_signup_view(request):
     userForm=forms.DoctorUserForm()
