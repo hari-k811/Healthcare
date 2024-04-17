@@ -50,12 +50,13 @@ urlpatterns = [
 
     path('patientprofile', views.patientprofile_view,name='patientprofile'),
     path('patient_details/', views.patient_details, name='patient_details'),
+    path('book-appointment/',views.book_appointment),
+    path('patient-prescription/', views.patient_prescription, name='patient-prescription'),
     
-    path('book-appointment/', views.book_appointment, name='book-appointment'),
-    path('approve-appointment/<int:appointment_id>/', views.approve_appointment, name='approve-appointment'),
+    path('manage-appointments/', views.manage_appointments, name='manage-appointments'),
+    path('accept-appointment/<int:appointment_id>/', views.accept_appointment, name='accept-appointment'),
     path('reject-appointment/<int:appointment_id>/', views.reject_appointment, name='reject-appointment'),
-    path('accept-reject-appointment/<int:appointment_id>/', views.accept_reject_appointment, name='accept-reject-appointment'),
-    path('accept-reject-appointment/', views.appointment_view, name='accept-reject-appointment'),
+    path('admin-manage-appointments',views.admin_manage_appointments),
     path('admin-manage-patients',views.manage_patients),
     path('admin-manage-doctors',views.manage_doctors),
 ]

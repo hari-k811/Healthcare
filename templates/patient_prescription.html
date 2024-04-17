@@ -1,0 +1,62 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard</title>
+    <link rel="stylesheet" href="{% static 'health/css/adminstyle.css' %}">
+    <style>
+        ul {
+            list-style-type: decimal;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="sidenav">
+        <img src="{% static 'health/images/patient.jpg' %}" alt="Profile Picture" class="profile-pic">
+        <div class="greeting">Hi, {{ request.user.first_name }}</div>
+        <a href="patient-dashboard" >Dashboard</a>
+        <a href="patientprofile">Profile</a>
+        <a href="book-appointment">Appointments</a>
+        <a href="patient-prescription" class="active">Prescriptions</a>
+        <a href="#">Medical Records</a>
+        <a href="#">Lab Results</a>
+        <a href="patient_details">Messages</a>
+        <a href="#">Settings</a>
+   
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" style="background-color: #f44336; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: block; font-size: 18px; margin-left: auto; margin-right: auto; margin-top: 20px; cursor: pointer;">Logout</button>
+        </form>
+    </div>
+    
+    <div class="pres" style="margin-left: 300px;">
+        <h1>Always Forgot your prescription where you placed??<br>
+            Upload it here for seamless access
+        </h1>
+        <h2>Prescriptions</h2>
+    {% if prescriptions %}
+        <ul>
+            {% for prescription in prescriptions %}
+                <li>
+                    <a href="{{ prescription.prescription_file.url }}">{{ prescription.prescription_file.name }}</a>
+                    <p>Uploaded at: {{ prescription.uploaded_at }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No prescriptions uploaded yet.</p>
+    {% endif %}
+    
+    <h2>Upload Prescription</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload Prescription</button>
+    </form>
+    </div>
+    
+</body>
+</html>

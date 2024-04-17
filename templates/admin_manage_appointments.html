@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Appointments</title>
+</head>
+<body>
+    <h1>Manage Appointments</h1>
+    <ul>
+        {% for appointment in appointments %}
+            <li>
+                <p>Patient: {{ appointment.patient.name }}</p>
+                <p>Date: {{ appointment.date }}</p>
+                <p>Time: {{ appointment.time }}</p>
+                {% if not appointment.accepted %}
+                    <form method="post" action="{% url 'accept-appointment' appointment.id %}">
+                        {% csrf_token %}
+                        <button type="submit">Accept</button>
+                    </form>
+                    <form method="post" action="{% url 'reject-appointment' appointment.id %}">
+                        {% csrf_token %}
+                        <button type="submit">Reject</button>
+                    </form>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -62,4 +62,12 @@ class Appointment(models.Model):
     time = models.TimeField()
     accepted = models.BooleanField(default=False)
 
+class Prescription(models.Model):
+    patient = models.ForeignKey(User, on_delete=models.CASCADE)
+    prescription_file = models.FileField(upload_to='prescriptions/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Prescription for {self.patient.username} uploaded at {self.uploaded_at}"
+
 

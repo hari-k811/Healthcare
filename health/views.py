@@ -1,15 +1,12 @@
 from django.shortcuts import render,redirect,reverse,get_object_or_404
 from . import forms,models
-from django.db.models import Sum
-from django.contrib.auth.models import Group
 from django.http import HttpResponseRedirect
-from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required,user_passes_test
 from datetime import datetime,timedelta,date
 from django.conf import settings
-from django.db.models import Q
-from . forms import HealthDataForm,AppointmentForm
-from . models import HealthData,Appointment,Doctor,Patient
+from . forms import HealthDataForm,AppointmentForm,PrescriptionForm
+from . models import HealthData,Appointment,Doctor,Patient,Prescription
+from django.http import HttpResponseBadRequest
 
 # Create your views here.
 def home_view(request):
@@ -147,7 +144,6 @@ def patient_details(request):
     patient = request.user.patient
     return render(request,'patirnt_details.html')
 
-#Appointments 
 @login_required
 def book_appointment(request):
     if request.method == 'POST':
@@ -162,31 +158,41 @@ def book_appointment(request):
     return render(request, 'book_appointment.html', {'form': form})
 
 @login_required
-def approve_appointment(request, appointment_id):
-    appointment = Appointment.objects.get(pk=appointment_id)
-    appointment.approved = True
+def manage_appointments(request):
+    doctor = request.user.doctor
+    appointments = Appointment.objects.filter(doctor=doctor)
+    return render(request, 'manage_appointments.html', {'appointments': appointments})
+
+@login_required
+def accept_appointment(request, appointment_id):
+    appointment = get_object_or_404(Appointment, id=appointment_id)
+    appointment.accepted = True
     appointment.save()
-    return redirect('doctor-dashboard')
+    return redirect('manage-appointments')
 
 @login_required
 def reject_appointment(request, appointment_id):
-    appointment = Appointment.objects.get(pk=appointment_id)
+    appointment = get_object_or_404(Appointment, id=appointment_id)
     appointment.delete()
-    return redirect('doctor-dashboard')
+    return redirect('manage-appointments')
+
+def admin_manage_appointments(request):
+    return render(request,'admin_manage_appointments.html')
 
 @login_required
-def accept_reject_appointment(request):
-    appointment_id = request.GET.get('id')
-    appointment = get_object_or_404(Appointment, id=appointment_id)
+def patient_prescription(request):
     if request.method == 'POST':
-        action = request.POST.get('action')
-        if action == 'accept':
-            appointment.accepted = True
-        elif action == 'reject':
-            appointment.delete()
-        appointment.save()
-        return redirect('admin-dashboard' if request.user.is_superuser else 'doctor-dashboard')
-    return render(request, 'accept_reject_appointment.html', {'appointment': appointment})
+        form = PrescriptionForm(request.POST, request.FILES)
+        if form.is_valid():
+            prescription = form.save(commit=False)
+            prescription.patient = request.user
+            prescription.save()
+            return redirect('patient-prescription')
+    else:
+        form = PrescriptionForm()
+    
+    prescriptions = Prescription.objects.filter(patient=request.user)
+    return render(request, 'patient_prescription.html', {'form': form, 'prescriptions': prescriptions})
 
 @login_required
 def appointment_view(request):
