@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Records</title>
+</head>
+<body>
+    <h1>Medical Records</h1>
+
+    <h2>Personal Information</h2>
+    <p>Name: {{ request.user.username }}</p>
+
+    <h2>Medical History</h2>
+    <p>Allergies: None</p>
+    <p>Medical Conditions:-</p>
+
+    <h2>Lab Results</h2>
+    <p>Not Available</p>
+
+    <a href="{% url 'patient-dashboard' %}">Back to Dashboard</a>
+</body>
+</html>

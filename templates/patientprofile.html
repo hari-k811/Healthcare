@@ -29,9 +29,31 @@
             <h1>Edit Health Data</h1>
             <form method="post">
                 {% csrf_token %}
-                {{ form.as_p }}
-            <button type="submit">Save</button>
+                <label for="id_blood_pressure">Blood Pressure:</label>
+                {{ form.blood_pressure }}
+                <br>
+                <label for="id_sugar_level">Sugar Level:</label>
+                {{ form.sugar_level }}
+                <br>
+                <label for="id_height">Height:</label>
+                {{ form.height }}
+                <br>
+                <label for="id_weight">Weight:</label>
+                {{ form.weight }}
+                <br>
+                <label for="id_heart_rate">Heart Rate:</label>
+                {{ form.heart_rate }}
+                <br>
+                <label for="id_cholesterol_level">Cholesterol Level:</label>
+                {{ form.cholestrol_level }}
+                <br>
+                <label for="id_body_temperature">Body Temperature:</label>
+                {{ form.body_temperature }}
+                <br>
+                <button type="submit">Save</button>
             </form>
+            
+            
         </div>
     </center>
 

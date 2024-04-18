@@ -50,6 +50,9 @@ class HealthData(models.Model):
     height = models.FloatField()
     weight = models.FloatField()
     bmi = models.FloatField()
+    heart_rate = models.FloatField()
+    body_temperature = models.FloatField()
+    cholestrol_level = models.FloatField()
 
     def __str__(self):
         return self.user.username + "'s Health Data"

@@ -44,7 +44,7 @@ class PatientForm(forms.ModelForm):
 class HealthDataForm(forms.ModelForm):
     class Meta:
         model = HealthData
-        fields = ['blood_pressure', 'sugar_level', 'height', 'weight', 'bmi']
+        fields = ['blood_pressure', 'sugar_level', 'height', 'weight', 'bmi','body_temperature','heart_rate','cholestrol_level']
 
 class AppointmentForm(forms.ModelForm):
     class Meta:

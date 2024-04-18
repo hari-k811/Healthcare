@@ -1,23 +1,9 @@
-"""
-URL configuration for healthcare project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path
 from health import views
 from django.contrib.auth.views import LoginView,LogoutView
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -50,8 +36,11 @@ urlpatterns = [
 
     path('patientprofile', views.patientprofile_view,name='patientprofile'),
     path('patient_details/', views.patient_details, name='patient_details'),
-    path('book-appointment/',views.book_appointment),
+    path('book-appointment/',views.book_appointment,name='book-appointment'),
     path('patient-prescription/', views.patient_prescription, name='patient-prescription'),
+    path('medical-records',views.patient_medical_records),
+    path('patient-settings/', views.patient_settings, name='patient_settings'),
+    path('patient-settings/change-password/', views.patient_change_password, name='patient_change_password'),
     
     path('manage-appointments/', views.manage_appointments, name='manage-appointments'),
     path('accept-appointment/<int:appointment_id>/', views.accept_appointment, name='accept-appointment'),
@@ -59,4 +48,10 @@ urlpatterns = [
     path('admin-manage-appointments',views.admin_manage_appointments),
     path('admin-manage-patients',views.manage_patients),
     path('admin-manage-doctors',views.manage_doctors),
+    path('admin_settings/', views.admin_settings),
+    path('admin-settings/change-password/', views.change_password, name='change_password'),
+
+    path('doctor-settings/', views.doctor_settings, name='doctor_settings'),
+    path('doctor-settings/change-password/', views.doctor_change_password, name='doctor_change_password'),
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

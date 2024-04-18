@@ -84,10 +84,10 @@ table, th, td {
         <a href="patientprofile">Profile</a>
         <a href="book-appointment">Appointments</a>
         <a href="patient-prescription">Prescriptions</a>
-        <a href="#">Medical Records</a>
+        <a href="medical-records">Medical Records</a>
         <a href="#">Lab Results</a>
-        <a href="patient_details">Messages</a>
-        <a href="#">Settings</a>
+        <!-- <a href="patient_details">Messages</a> -->
+        <a href="patient-settings">Settings</a>
    
         <form method="post" action="{% url 'logout' %}">
             {% csrf_token %}
@@ -104,6 +104,9 @@ table, th, td {
                 <th>Height</th>
                 <th>Weight</th>
                 <th>BMI</th>
+                <th>Heart Rate</th>
+                <th>Cholestrol level</th>
+                <th>Body temperature</th>
             </tr>
             {% for data in health_data %}
                 <tr>
@@ -112,6 +115,9 @@ table, th, td {
                     <td>{{ data.height }}</td>
                     <td>{{ data.weight }}</td>
                     <td>{{ data.bmi }}</td>
+                    <td>{{data.heart_rate}}</td>
+                    <td>{{data.cholestrol_level}}</td>
+                    <td>{{data.body_temperature}}</td>
                 </tr>
             {% endfor %}
         </table>

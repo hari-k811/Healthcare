@@ -7,6 +7,8 @@ from django.conf import settings
 from . forms import HealthDataForm,AppointmentForm,PrescriptionForm
 from . models import HealthData,Appointment,Doctor,Patient,Prescription
 from django.http import HttpResponseBadRequest
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 
 # Create your views here.
 def home_view(request):
@@ -110,11 +112,43 @@ def admin_dashboard_view(request):
     appointments = Appointment.objects.all()
     return render(request, 'admin_dashboard.html', {'appointments': appointments})
 
+@login_required
+def admin_settings(request):
+    return render(request,'admin_settings.html')
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            return redirect('admin_settings')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'change_password.html', {'form': form})
+
 @login_required(login_url='doctorlogin')
 @user_passes_test(is_doctor)
 def doctor_dashboard_view(request):
     appointments = Appointment.objects.filter(doctor=request.user.doctor)
     return render(request, 'doctor_dashboard.html', {'appointments': appointments})
+
+@login_required
+def doctor_settings(request):
+    return render(request, 'doctor_settings.html')
+
+@login_required
+def doctor_change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            return redirect('doctor_settings')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'change_password.html', {'form': form})
 
 @login_required(login_url='patientlogin')
 @user_passes_test(is_patient)
@@ -180,6 +214,10 @@ def admin_manage_appointments(request):
     return render(request,'admin_manage_appointments.html')
 
 @login_required
+def patient_medical_records(request):
+    return render(request,'medical_records.html')
+
+@login_required
 def patient_prescription(request):
     if request.method == 'POST':
         form = PrescriptionForm(request.POST, request.FILES)
@@ -197,6 +235,21 @@ def patient_prescription(request):
 @login_required
 def appointment_view(request):
     return render(request,'appointments.html')
+@login_required
+def patient_settings(request):
+    return render(request, 'patient_settings.html')
+
+@login_required
+def patient_change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            return redirect('patient_settings')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'change_password.html', {'form': form})
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)

@@ -1,10 +1,10 @@
-{% load static %}
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Doctor Settings</title>
     <style>
         .sidenav {
             height: 100%;
@@ -72,21 +72,44 @@
     </style>
 </head>
 <body>
+    <div class="sidenav">
+        <img src="{% static 'health/images/doc.jpg' %}" alt="Profile Picture" class="profile-pic">
+        <div class="greeting">Hi, {{ request.user.username }}</div>
+        <a href="#">Dashboard</a>
+        <a href="accept-reject-appointment">Appointments</a>
+        <a href="#">Patients</a>
+        <a href="#">Messages</a>
+        <a href="doctor-settings" class="active">Settings</a>
+    
+        <form method="post" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <button type="submit">Logout</button>
+        </form>
+    </div>
+    <center>
+        <div class="set">
+            <h1>Doctor Settings</h1>
 
-<div class="sidenav">
-    <img src="{% static 'health/images/doc.jpg' %}" alt="Profile Picture" class="profile-pic">
-    <div class="greeting">Hi, {{ request.user.username }}</div>
-    <a href="#" class="active">Dashboard</a>
-    <a href="accept-reject-appointment">Appointments</a>
-    <a href="#">Patients</a>
-    <a href="#">Messages</a>
-    <a href="doctor-settings">Settings</a>
+    <h2>Profile Information</h2>
+    <p>Username: {{ request.user.username }}</p>
+    <p>First Name: {{ request.user.first_name }}</p>
+    <p>Last Name: {{ request.user.last_name }}</p>
 
-    <form method="post" action="{% url 'logout' %}">
-      {% csrf_token %}
-      <button type="submit">Logout</button>
+    <h2>Change Password</h2>
+    <form method="post" action="{% url 'doctor_change_password' %}">
+        {% csrf_token %}
+        <label for="id_old_password">Old Password:</label>
+        <input type="password" name="old_password" id="id_old_password" required><br>
+        <label for="id_new_password1">New Password:</label>
+        <input type="password" name="new_password1" id="id_new_password1" required><br>
+        <label for="id_new_password2">Confirm New Password:</label>
+        <input type="password" name="new_password2" id="id_new_password2" required><br>
+        <button type="submit">Change Password</button>
     </form>
-</div>
 
+        </div>
+    </center>
+    
+   
 </body>
 </html>

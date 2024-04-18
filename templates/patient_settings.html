@@ -4,59 +4,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Dashboard</title>
+    <title>Patient Settings</title>
     <link rel="stylesheet" href="{% static 'health/css/adminstyle.css' %}">
-    <style>
-        ul {
-            list-style-type: decimal;
-        }
-    </style>
 </head>
 <body>
-    
     <div class="sidenav">
         <img src="{% static 'health/images/patient.jpg' %}" alt="Profile Picture" class="profile-pic">
         <div class="greeting">Hi, {{ request.user.first_name }}</div>
         <a href="{%url 'patient-dashboard'%}" >Dashboard</a>
         <a href="patientprofile">Profile</a>
         <a href="book-appointment">Appointments</a>
-        <a href="patient-prescription" class="active">Prescriptions</a>
+        <a href="patient-prescription" >Prescriptions</a>
         <a href="#">Medical Records</a>
         <a href="#">Lab Results</a>
         <!-- <a href="patient_details">Messages</a> -->
-        <a href="#">Settings</a>
+        <a href="#" class="active">Settings</a>
    
         <form method="post" action="{% url 'logout' %}">
             {% csrf_token %}
             <button type="submit" style="background-color: #f44336; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: block; font-size: 18px; margin-left: auto; margin-right: auto; margin-top: 20px; cursor: pointer;">Logout</button>
         </form>
     </div>
-    
-    <div class="pres" style="margin-left: 300px;">
-        <h1>Always Forgot your prescription where you placed??<br>
-            Upload it here for seamless access
-        </h1>
-        <h2>Prescriptions</h2>
-    {% if prescriptions %}
-        <ul>
-            {% for prescription in prescriptions %}
-                <li>
-                    <a href="{{ prescription.prescription_file.url }}">{{ prescription.prescription_file.name }}</a>
-                    <p>Uploaded at: {{ prescription.uploaded_at }}</p>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No prescriptions uploaded yet.</p>
-    {% endif %}
-    
-    <h2>Upload Prescription</h2>
-    <form method="post" enctype="multipart/form-data">
+    <center>
+        <div class="set" style="margin-left: 300px;">
+            <h1>Patient Settings</h1>
+
+    <h2>Profile Information</h2>
+    <p>Username: {{ request.user.username }}</p>
+    <p>First Name: {{ request.user.first_name }}</p>
+    <p>Last Name: {{ request.user.last_name }}</p>
+
+    <h2>Change Password</h2>
+    <form method="post" action="{% url 'patient_change_password' %}">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Upload Prescription</button>
+        <label for="id_old_password">Old Password:</label>
+        <input type="password" name="old_password" id="id_old_password" required><br>
+        <label for="id_new_password1">New Password:</label>
+        <input type="password" name="new_password1" id="id_new_password1" required><br>
+        <label for="id_new_password2">Confirm New Password:</label>
+        <input type="password" name="new_password2" id="id_new_password2" required><br>
+        <button type="submit">Change Password</button>
     </form>
-    </div>
-    
+        </div>
+    </center>
+
 </body>
 </html>
