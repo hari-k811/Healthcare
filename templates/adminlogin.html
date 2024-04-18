@@ -9,9 +9,18 @@
 
   <style type="text/css">
     body {
-      color: #aa082e;
+       color: #aa082e;
       background-color: #b6bde7;
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Roboto', sans-serif; 
+  
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 55vh;
+    /* background:url(bkg.jpg) no-repeat; */
+    background-size: cover;
+    background-position: center;
+
     }
 
     a:link {
@@ -28,29 +37,97 @@
     }
 
     .form-content {
-      padding: 5%;
+      /* padding: 5%;
       border: 1px solid #ced4da;
-      margin-bottom: 2%;
+      margin-bottom: 2%; */
+
+      width: 420px;
+    background:transparent;
+    border:2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(20px);
+    box-shadow:0 0 10px rgba(0, 0, 0, .2);
+    color:#fff;
+    border-radius: 10px;
+    padding: 30px 40px;
+    
+    
     }
 
-    .form-control {
+    .form {
+      position:relative;
+    width:100%;
+    height: 50px;
+    background:transparent;
+    margin:30px 0;
+    
+    }
+
+    .form .col-md-6 .form-control{
+    width: 75%;
+    height: 75%;
+    background:transparent;
+    border:none;
+    outline:none;
+    border:2px solid rgba(255, 255, 255, .2);
+    border-radius:40px;
+    font-size: 16px;
+    color:#fff;
+    padding:20px 45px 20px 20px;
+    margin: 10px;;
+    justify-content: space-around;
+    display: flex;
+
+    
+    }
+    
+    /* .form-control {
       border-radius: 1.5rem;
     }
 
+    .row .form-control {
+    color:#fff;
+} */
+
     .btnSubmit {
-      border: none;
       border-radius: 1.5rem;
       padding: 1%;
       width: 20%;
-      cursor: pointer;
-      background: #0062cc;
+      height: 45px;
+      background:#0062cc;
+      border:none;
+      outline:none;
+      border-radius: 40px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+      cursor:pointer;
+      font-size: 16px;
       color: #fff;
+       font-weight: 600;
+       margin: 10px;
     }
     .error-message {
       color: red;
       font-size: 14px;
       text-align: center;
     }
+
+    .form .text-center{
+      display:flex;
+    font-size: 14.5px;
+    margin: 15px;
+    accent-color: #fff;
+    margin-right: 3px;
+    
+    }
+
+  .text-center a{
+      color:#0062cc;
+    font-weight: 600;
+  }
+
+    .text-center a:hover{
+    text-decoration: underline;
+
+     }
   </style>
 
   <script>
@@ -103,7 +180,7 @@
             <button type="submit" class="btnSubmit">Login</button>
           </form>
         
-          <div class="text-center">Do not have an account? <a href="adminsignup">Signup here</a></div>
+          <div class="text-center">Do not have an account? <a href="adminsignup"> Signup here</a></div>
         </div>
       </div>
     </div>
