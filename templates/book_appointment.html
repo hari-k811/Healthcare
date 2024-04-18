@@ -22,17 +22,18 @@
         <a href="patient-dashboard" >Dashboard</a>
         <a href="patientprofile" >Profile</a>
         <a href="book-appointment" class="active">Appointments</a>
-        <a href="#">Prescriptions</a>
-        <a href="#">Medical Records</a>
+        <a href="{%url 'patient-prescription'%}">Prescriptions</a>
+        <!-- <a href="#">Medical Records</a> -->
         <a href="#">Lab Results</a>
         <!-- <a href="patient_details">Messages</a> -->
-        <a href="#">Settings</a>
+        <a href="patient_settings">Settings</a>
         <form method="post" action="{% url 'logout' %}">
             {% csrf_token %}
             <button type="submit" >Logout</button>
         </form>
+    </div>
 
-        <center>
+        <center style="margin-left: 100px;">
             <h1>Book Appointment</h1>
             <form method="POST">
                 {% csrf_token %}

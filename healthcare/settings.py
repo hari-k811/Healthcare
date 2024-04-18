@@ -58,9 +58,9 @@ WSGI_APPLICATION = 'healthcare.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'my_hc',
+        'NAME': 'test_db',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': 'Abcd@1234',
         'HOST': '127.0.0.1',  
         'PORT': '3306',       
     }

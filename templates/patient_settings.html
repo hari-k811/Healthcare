@@ -12,13 +12,13 @@
         <img src="{% static 'health/images/patient.jpg' %}" alt="Profile Picture" class="profile-pic">
         <div class="greeting">Hi, {{ request.user.first_name }}</div>
         <a href="{%url 'patient-dashboard'%}" >Dashboard</a>
-        <a href="patientprofile">Profile</a>
-        <a href="book-appointment">Appointments</a>
-        <a href="patient-prescription" >Prescriptions</a>
-        <a href="#">Medical Records</a>
+        <a href="{%url 'patientprofile'%}">Profile</a>
+        <a href="{%url 'book-appointment'%}">Appointments</a>
+        <a href="{%url 'patient-prescription'%}" >Prescriptions</a>
+        <!-- <a href="#">Medical Records</a> -->
         <a href="#">Lab Results</a>
         <!-- <a href="patient_details">Messages</a> -->
-        <a href="#" class="active">Settings</a>
+        <a href="{%url 'patient_settings'%}" class="active">Settings</a>
    
         <form method="post" action="{% url 'logout' %}">
             {% csrf_token %}
