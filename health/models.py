@@ -55,7 +55,8 @@ class HealthData(models.Model):
     cholestrol_level = models.FloatField()
 
     def __str__(self):
-        return self.user.username + "'s Health Data"
+        return f"{self.patient.user.username}'s Health Data"
+
 
 
 class Appointment(models.Model):

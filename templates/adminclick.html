@@ -1,5 +1,47 @@
 {% block content %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin</title>
+</head>
+<body>
+  <style>
+  body {
+    background-color: black; 
+    color: white;
+  }
 
+  .jumbotron {
+    padding: 2rem 1rem;
+  }
+
+  a {
+    color: aqua;
+    text-decoration: none;
+  }
+
+  .display-4 {
+    font-size: 2.5rem; 
+  }
+
+  .lead {
+    font-size: 1.25rem; 
+  }
+
+  @media (max-width: 768px) {
+    .jumbotron {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+    .display-4 {
+      font-size: 2rem;
+    }
+    .lead {
+      font-size: 1rem;
+    }
+  }
+</style>
 <br>
 <br>
 
@@ -15,3 +57,6 @@
 </div>
 
 {% endblock content %}
+
+</body>
+</html>

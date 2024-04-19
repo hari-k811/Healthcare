@@ -1,17 +1,61 @@
 {% block content %}
 
-<br>
-<br>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient</title>
+  <style>
+    body {
+      background-color: black; 
+      color: white;
+    }
+  
+    .jumbotron {
+      padding: 2rem 1rem;
+    }
+  
+    a {
+      color: aqua;
+      text-decoration: none;
+    }
+  
+    .display-4 {
+      font-size: 2.5rem; 
+    }
+  
+    .lead {
+      font-size: 1.25rem; 
+    }
+  
+    @media (max-width: 768px) {
+      .jumbotron {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+      }
+      .display-4 {
+        font-size: 2rem;
+      }
+      .lead {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="jumbotron" style="margin-bottom:0px;">
+    <h1 class="display-4" style="text-align:center;">Hello, Patient</h1>
+    <p class="lead">Welcome to Healthcare Management System.</p>
+    <hr class="my-4">
+    <p>You can access various features after Login/SignUp.</p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="/patientsignup" role="button">Register Your Account</a>
+      <a class="btn btn-primary btn-lg" href="/patientlogin" role="button">Login</a>
+    </p>
+  </div>
+</body>
+</html>
 
-<div class="jumbotron" style="margin-bottom:0px;">
-  <h1 class="display-4" style="text-align:center;">Hello, Patient</h1>
-  <p class="lead">Welcome to Healthcare Management System.</p>
-  <hr class="my-4">
-  <p>You can access various features after Login/SignUp.</p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="/patientsignup" role="button">Register Your Account</a>
-    <a class="btn btn-primary btn-lg" href="/patientlogin" role="button">Login</a>
-  </p>
-</div>
+
 
 {% endblock content %}

@@ -131,8 +131,15 @@ def change_password(request):
 @login_required(login_url='doctorlogin')
 @user_passes_test(is_doctor)
 def doctor_dashboard_view(request):
-    appointments = Appointment.objects.filter(doctor=request.user.doctor)
-    return render(request, 'doctor_dashboard.html', {'appointments': appointments})
+    doctor = request.user.doctor
+    appointments = Appointment.objects.filter(doctor=doctor)
+    num_patients = Patient.objects.count()
+    
+    context = {
+        'num_patients': num_patients
+    }
+    
+    return render(request, 'doctor_dashboard.html', context)
 
 @login_required
 def doctor_settings(request):
@@ -164,7 +171,6 @@ def patientprofile_view(request):
         form = HealthDataForm(request.POST)
         if form.is_valid():
             health_data = form.save(commit=False)
-            # Get the patient associated with the current user
             patient = request.user.patient
             health_data.patient = patient
             health_data.save()
@@ -251,14 +257,22 @@ def patient_change_password(request):
         form = PasswordChangeForm(request.user)
     return render(request, 'change_password.html', {'form': form})
 
+@login_required
+def lab_results(request):
+    return render(request,'lab_results.html')
+
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def manage_doctors(request):
     doctors = Doctor.objects.all()
     return render(request, 'admin_manage_doctors.html', {'doctors': doctors})
 
-@login_required(login_url='adminlogin')
-@user_passes_test(is_admin)
+@login_required
 def manage_patients(request):
     patients = Patient.objects.all()
     return render(request, 'admin_manage_patients.html', {'patients': patients})
+
+@login_required
+def doc_manage_patients(request):
+    patients = Patient.objects.all()
+    return render(request, 'doctor_manage_patients.html', {'patients': patients})

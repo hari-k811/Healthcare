@@ -1,78 +1,22 @@
-{%load static%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Dashboard</title>
+    <link rel="stylesheet" href="{% static 'health/css/adminstyle.css' %}">
     <style>
-     
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
+        .table-wrapper {
+            overflow-x: auto;
+        }
 
-.sidenav {
-    height: 100%;
-    width: 250px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #f0f0f0;
-    overflow-x: hidden;
-    padding-top: 20px;
-}
-
-.sidenav a {
-    padding: 10px 15px;
-    text-decoration: none;
-    font-size: 18px;
-    color: #333;
-    display: block;
-}
-
-.sidenav a.active {
-    background-color: #4CAF50;
-    color: white;
-}
-
-.sidenav a:hover {
-    background-color: #ddd;
-    color: black;
-}
-
-.profile-pic {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-bottom: 20px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.greeting {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.content {
-    margin-left: 270px; 
-    margin-top: 20px;
-}
-
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-table, th, td {
-    border: 1px solid black;
-    padding: 8px;
-    text-align: left;
-}
-
+        /* Media queries for responsive design */
+        @media only screen and (max-width: 768px) {
+            .content {
+                margin-left: 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -80,52 +24,50 @@ table, th, td {
     <div class="sidenav">
         <img src="{% static 'health/images/patient.jpg' %}" alt="Profile Picture" class="profile-pic">
         <div class="greeting">Hi, {{ request.user.first_name }}</div>
-        <a href="#" class="active">Dashboard</a>
-        <a href="patientprofile">Profile</a>
-        <a href="book-appointment">Appointments</a>
-        <a href="patient-prescription">Prescriptions</a>
-        <!-- <a href="medical-records">Medical Records</a> -->
-        <a href="#">Lab Results</a>
-        <!-- <a href="patient_details">Messages</a> -->
-        <a href="patient-settings">Settings</a>
+        <a href="{%url 'patient-dashboard'%}" class="active">Dashboard</a>
+        <a href="{%url 'patientprofile'%}">Profile</a>
+        <a href="{%url 'book-appointment'%}">Appointments</a>
+        <a href="{%url 'patient-prescription'%}">Prescriptions</a>
+        <a href="{%url 'lab-results'%}">Lab Results</a>
+        <a href="{%url 'patient_settings'%}">Settings</a>
    
         <form method="post" action="{% url 'logout' %}">
             {% csrf_token %}
-            <button type="submit" style="background-color: #f44336; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: block; font-size: 18px; margin-left: auto; margin-right: auto; margin-top: 20px; cursor: pointer;">Logout</button>
+            <button class="btn-submit" type="submit">Logout</button>
         </form>
     </div>
-    
-    <div class="content">
-        <h1>Health Data</h1>
-        <table>
-            <tr>
-                <th>Blood Pressure</th>
-                <th>Sugar Level</th>
-                <th>Height</th>
-                <th>Weight</th>
-                <th>BMI</th>
-                <th>Heart Rate</th>
-                <th>Cholestrol level</th>
-                <th>Body temperature</th>
-            </tr>
-            {% for data in health_data %}
-                <tr>
-                    <td>{{ data.blood_pressure }}</td>
-                    <td>{{ data.sugar_level }}</td>
-                    <td>{{ data.height }}</td>
-                    <td>{{ data.weight }}</td>
-                    <td>{{ data.bmi }}</td>
-                    <td>{{data.heart_rate}}</td>
-                    <td>{{data.cholestrol_level}}</td>
-                    <td>{{data.body_temperature}}</td>
-                </tr>
-            {% endfor %}
-        </table>
-    </div>
 
+    <div class="content">
+        <center>
+            <h1>Health Data</h1>
+            <div class="table-wrapper">
+                <table>
+                    <tr>
+                        <th>Blood Pressure</th>
+                        <th>Sugar Level</th>
+                        <th>Height</th>
+                        <th>Weight</th>
+                        <th>BMI</th>
+                        <th>Heart Rate</th>
+                        <th>Cholesterol level</th>
+                        <th>Body Temperature</th>
+                    </tr>
+                    {% for data in health_data %}
+                        <tr>
+                            <td>{{ data.blood_pressure }}</td>
+                            <td>{{ data.sugar_level }}</td>
+                            <td>{{ data.height }}</td>
+                            <td>{{ data.weight }}</td>
+                            <td>{{ data.bmi }}</td>
+                            <td>{{ data.heart_rate }}</td>
+                            <td>{{ data.cholestrol_level }}</td>
+                            <td>{{ data.body_temperature }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </center>
+    </div>
+    
 </body>
 </html>
-
-
-  
-  

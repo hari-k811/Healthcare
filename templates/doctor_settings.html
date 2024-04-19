@@ -75,9 +75,9 @@
     <div class="sidenav">
         <img src="{% static 'health/images/doc.jpg' %}" alt="Profile Picture" class="profile-pic">
         <div class="greeting">Hi, {{ request.user.username }}</div>
-        <a href="#">Dashboard</a>
+        <a href="{%url 'doctor-dashboard'%}">Dashboard</a>
         <a href="accept-reject-appointment">Appointments</a>
-        <a href="#">Patients</a>
+        <a href="{%url 'doctor-manage-patients'%}">Patients</a>
         <a href="#">Messages</a>
         <a href="doctor-settings" class="active">Settings</a>
     

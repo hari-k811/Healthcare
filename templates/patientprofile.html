@@ -15,8 +15,8 @@
         <a href="book-appointment">Appointments</a>
         <a href="patient-prescription">Prescriptions</a>
         <!-- <a href="#">Medical Records</a> -->
-        <a href="#">Lab Results</a>
-        <a href="patient_details">Messages</a>
+        <a href="{%url 'lab-results'%}">Lab Results</a>
+        <!-- <a href="patient_details">Messages</a> -->
         <a href="#">Settings</a>
    
         <form method="post" action="{% url 'logout' %}">
@@ -43,6 +43,9 @@
                 <br>
                 <label for="id_heart_rate">Heart Rate:</label>
                 {{ form.heart_rate }}
+                <br>
+                <label for="id_bmi">BMI:</label>
+                {{ form.bmi }}
                 <br>
                 <label for="id_cholesterol_level">Cholesterol Level:</label>
                 {{ form.cholestrol_level }}

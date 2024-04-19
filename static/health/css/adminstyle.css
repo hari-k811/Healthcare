@@ -1,6 +1,9 @@
- /* Style for the side panel */
- .sidenav {
-    height: 100%;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.sidenav {
     width: 250px;
     position: fixed;
     z-index: 1;
@@ -11,7 +14,6 @@
     padding-top: 20px;
 }
 
-/* Style for the links inside the side panel */
 .sidenav a {
     padding: 10px 15px;
     text-decoration: none;
@@ -20,19 +22,16 @@
     display: block;
 }
 
-/* Style for the active/current link */
 .sidenav a.active {
     background-color: #4CAF50;
     color: white;
 }
 
-/* Style for the hover effect on links */
 .sidenav a:hover {
     background-color: #ddd;
     color: black;
 }
 
-/* Style for the profile picture */
 .profile-pic {
     width: 100px;
     height: 100px;
@@ -43,8 +42,27 @@
     margin-right: auto;
 }
 
-/* Style for the logout button */
-.logout-btn {
+.greeting {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.content {
+    margin-top: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+.btn-submit {
     background-color: #f44336;
     color: white;
     border: none;
@@ -53,11 +71,21 @@
     text-decoration: none;
     display: block;
     font-size: 18px;
-    margin: 20px auto; /* Center the button horizontally */
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
     cursor: pointer;
 }
 
-/* Style for the logout button hover effect */
-.logout-btn:hover {
-    background-color: #d32f2f;
+/* Media queries for responsive design */
+@media only screen and (max-width: 768px) {
+    .sidenav {
+        width: 100%;
+        height: auto;
+        position: static;
+    }
+    
+    .content {
+        margin-left: 0;
+    }
 }

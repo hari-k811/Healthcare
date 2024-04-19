@@ -13,12 +13,12 @@
         
         <p>Welcome, {{ request.user.first_name }}</p>
         
-        <a href="admin-dashboard" >Dashboard</a>
-        <a href="admin-manage-doctors" >Manage Doctors</a>
-        <a href="admin-manage-patients" >Manage Patients</a>
+        <a href="{%url 'admin-dashboard'%}" >Dashboard</a>
+        <a href="{%url 'admin-manage-doctors'%}" >Manage Doctors</a>
+        <a href="{%url 'admin-manage-patients'%}" >Manage Patients</a>
         <a href="accept-reject-appointment">Appointments</a>
         <a href="#">Reports</a>
-        <a href="admin_settings" class="active">Settings</a>
+        <a href="{%url 'admin_settings'%}" class="active">Settings</a>
     
     
         <form method="post" action="{% url 'logout' %}">

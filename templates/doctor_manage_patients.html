@@ -1,0 +1,45 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Patients</title>
+    <link rel="stylesheet" href="{% static 'health/css/adminstyle.css' %}">
+    <style>
+        .content {
+            margin: 0 auto;
+            max-width: 900px;
+            padding: 20px;
+            text-align: center;
+        }
+        ul{
+            list-style-type: decimal ;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidenav">
+        <img src="{% static 'health/images/doc.jpg' %}" alt="Profile Picture" class="profile-pic">
+        <div class="greeting">Hi, {{ request.user.username }}</div>
+        <a href="{% url 'doctor-dashboard' %}" >Dashboard</a>
+        <a href="accept-reject-appointment">Appointments</a>
+        <a href=""class="active">Patients</a>
+        <a href="#">Messages</a>
+        <a href="doctor-settings">Settings</a>
+    
+        <form method="post" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <button type="submit">Logout</button>
+        </form>
+    </div>
+    <div class="content">
+        <h1>Manage Patients</h1>
+        <ul>
+            {% for patient in patients %}
+            <li>{{ patient.user.username }}  {{ patient.age }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

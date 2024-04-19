@@ -19,9 +19,9 @@
     <div class="sidenav">
         <img src="{% static 'health/images/patient.jpg' %}" alt="Profile Picture" class="profile-pic">
         <div class="greeting">Hi, {{ request.user.first_name }}</div>
-        <a href="patient-dashboard" >Dashboard</a>
-        <a href="patientprofile" >Profile</a>
-        <a href="book-appointment" class="active">Appointments</a>
+        <a href="{%url 'patient-dashboard'%}" >Dashboard</a>
+        <a href="{%url 'patientprofile'%}" >Profile</a>
+        <a href="{%url 'book-appointment'%}" class="active">Appointments</a>
         <a href="{%url 'patient-prescription'%}">Prescriptions</a>
         <!-- <a href="#">Medical Records</a> -->
         <a href="#">Lab Results</a>

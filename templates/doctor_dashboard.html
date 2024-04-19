@@ -76,9 +76,9 @@
 <div class="sidenav">
     <img src="{% static 'health/images/doc.jpg' %}" alt="Profile Picture" class="profile-pic">
     <div class="greeting">Hi, {{ request.user.username }}</div>
-    <a href="#" class="active">Dashboard</a>
+    <a href="{%url 'doctor-dashboard'%}" class="active">Dashboard</a>
     <a href="accept-reject-appointment">Appointments</a>
-    <a href="#">Patients</a>
+    <a href="{%url 'doctor-manage-patients'%}">Patients</a>
     <a href="#">Messages</a>
     <a href="doctor-settings">Settings</a>
 
@@ -87,6 +87,10 @@
       <button type="submit">Logout</button>
     </form>
 </div>
+<center style="margin-left: 200px;">
+    <h2>Number of Patients: {{ num_patients }}</h2>
+    <h2>Number of Appointments: {{ num_appointments }}</h2>
+</center>
 
 </body>
 </html>
