@@ -77,7 +77,7 @@
     <img src="{% static 'health/images/doc.jpg' %}" alt="Profile Picture" class="profile-pic">
     <div class="greeting">Hi, {{ request.user.username }}</div>
     <a href="{%url 'doctor-dashboard'%}" class="active">Dashboard</a>
-    <a href="accept-reject-appointment">Appointments</a>
+    <a href="{%url 'manage-appointments'%}">Appointments</a>
     <a href="{%url 'doctor-manage-patients'%}">Patients</a>
     <a href="#">Messages</a>
     <a href="doctor-settings">Settings</a>

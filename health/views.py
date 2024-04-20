@@ -101,8 +101,8 @@ def afterlogin_view(request):
         return redirect('doctor-dashboard')
     elif is_patient(request.user):
         return redirect('patient-dashboard')
-    else:
-        error_message = "Invalid username or password. Please try again."
+    
+    error_message = "Invalid username or password. Please try again."
 
     return render(request, 'index.html', {'error_message': error_message})
 
@@ -132,7 +132,6 @@ def change_password(request):
 @user_passes_test(is_doctor)
 def doctor_dashboard_view(request):
     doctor = request.user.doctor
-    appointments = Appointment.objects.filter(doctor=doctor)
     num_patients = Patient.objects.count()
     
     context = {
@@ -199,7 +198,21 @@ def book_appointment(request):
 
 @login_required
 def manage_appointments(request):
-    doctor = request.user.doctor
+    if request.method == 'POST':
+        appointment_id = request.POST.get('appointment_id')
+        action = request.POST.get('action')
+        appointment = Appointment.objects.get(id=appointment_id)
+        if action == 'accept':
+            appointment.status = 'Accepted'
+            appointment.save()
+            messages.success(request, 'Appointment accepted successfully!')
+        elif action == 'reject':
+            appointment.status = 'Rejected'
+            appointment.save()
+            messages.success(request, 'Appointment rejected successfully!')
+        return redirect('manage_appointments')
+
+    doctor = request.user
     appointments = Appointment.objects.filter(doctor=doctor)
     return render(request, 'manage_appointments.html', {'appointments': appointments})
 

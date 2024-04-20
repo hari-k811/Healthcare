@@ -58,13 +58,21 @@ class HealthData(models.Model):
         return f"{self.patient.user.username}'s Health Data"
 
 
-
 class Appointment(models.Model):
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
-    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
+    STATUS_CHOICES = (
+        ('Pending', 'Pending'),
+        ('Accepted', 'Accepted'),
+        ('Rejected', 'Rejected'),
+    )
+
+    doctor = models.ForeignKey(User, on_delete=models.CASCADE)
+    patient = models.CharField(max_length=100)
     date = models.DateField()
     time = models.TimeField()
-    accepted = models.BooleanField(default=False)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
+
+    def __str__(self):
+        return f"{self.patient}'s Appointment with Dr. {self.doctor.username}"
 
 class Prescription(models.Model):
     patient = models.ForeignKey(User, on_delete=models.CASCADE)
