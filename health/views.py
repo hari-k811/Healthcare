@@ -101,16 +101,24 @@ def afterlogin_view(request):
         return redirect('doctor-dashboard')
     elif is_patient(request.user):
         return redirect('patient-dashboard')
-    
-    error_message = "Invalid username or password. Please try again."
+    else:
+        error_message = "Invalid username or password. Please try again."
 
-    return render(request, 'index.html', {'error_message': error_message})
+        return render(request, 'index.html', {'invalid_credentials': True})
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def admin_dashboard_view(request):
     appointments = Appointment.objects.all()
-    return render(request, 'admin_dashboard.html', {'appointments': appointments})
+    num_patients = Patient.objects.count()
+    num_appointments = Appointment.objects.all().filter(status=True).count()
+    
+    context = {
+        'num_patients': num_patients,
+        'num_appointments':num_appointments
+    }
+    
+    return render(request, 'admin_dashboard.html', context)
 
 @login_required
 def admin_settings(request):
@@ -133,9 +141,11 @@ def change_password(request):
 def doctor_dashboard_view(request):
     doctor = request.user.doctor
     num_patients = Patient.objects.count()
+    num_appointments = Appointment.objects.all().filter(status=True).count()
     
     context = {
-        'num_patients': num_patients
+        'num_patients': num_patients,
+        'num_appointments':num_appointments
     }
     
     return render(request, 'doctor_dashboard.html', context)
@@ -219,15 +229,16 @@ def manage_appointments(request):
 @login_required
 def accept_appointment(request, appointment_id):
     appointment = get_object_or_404(Appointment, id=appointment_id)
-    appointment.accepted = True
+    appointment.status = 'Accepted'
     appointment.save()
-    return redirect('manage-appointments')
+    return redirect('manage_appointments')
 
 @login_required
 def reject_appointment(request, appointment_id):
     appointment = get_object_or_404(Appointment, id=appointment_id)
-    appointment.delete()
-    return redirect('manage-appointments')
+    appointment.status = 'Rejected'
+    appointment.save()
+    return redirect('manage_appointments')
 
 def admin_manage_appointments(request):
     return render(request,'admin_manage_appointments.html')

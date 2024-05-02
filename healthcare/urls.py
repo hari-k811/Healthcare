@@ -44,9 +44,10 @@ urlpatterns = [
     path('lab-results',views.lab_results,name='lab-results'),
     
     path('manage-appointments/', views.manage_appointments, name='manage-appointments'),
-    path('accept-appointment/<int:appointment_id>/', views.accept_appointment, name='accept-appointment'),
-    path('reject-appointment/<int:appointment_id>/', views.reject_appointment, name='reject-appointment'),
+    path('accept/<int:appointment_id>/', views.accept_appointment, name='accept_appointment'),
+    path('reject/<int:appointment_id>/', views.reject_appointment, name='reject_appointment'),
     path('admin-manage-appointments',views.admin_manage_appointments),
+    path('manage_appointments',views.admin_manage_appointments,name='manage_appointment'),
     path('admin-manage-patients',views.manage_patients,name='admin-manage-patients'),
     path('admin-manage-doctors',views.manage_doctors,name='admin-manage-doctors'),
     path('admin_settings/', views.admin_settings,name='admin_settings'),
@@ -54,6 +55,6 @@ urlpatterns = [
 
     path('doctor-settings/', views.doctor_settings, name='doctor_settings'),
     path('doctor-manage-patients',views.doc_manage_patients,name='doctor-manage-patients'),
-    path('doctor-settings/change-password/', views.doctor_change_password, name='doctor_change_password'),
+    path('change-password/', views.doctor_change_password, name='doctor_change_password'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

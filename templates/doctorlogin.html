@@ -160,6 +160,9 @@
     </div>
 
   </form>
+  {% if invalid_credentials %}
+  <p style="color: red;">Invalid username or password.</p>
+  {% endif %}
 
   <br><br><br>
 

@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from . import models
-from . models import HealthData,Appointment,Prescription
+from . models import HealthData,Appointment,Prescription,Message
 
 
 
@@ -59,6 +59,13 @@ class PrescriptionForm(forms.ModelForm):
     class Meta:
         model = Prescription
         fields = ['prescription_file']
+
+
+class MessageForm(forms.ModelForm):
+    class Meta:
+        model = Message
+        fields = ['subject', 'body']
+
 
 
 
